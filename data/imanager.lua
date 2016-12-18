@@ -235,7 +235,6 @@ function create_config( )
     "SuperGroup",
     "Arabic_lock",
     "lock_UserName",
-    "lock_Tag",
     "lock_Operator",
     "lock_Media",
     "lock_Join",
