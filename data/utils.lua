@@ -3,12 +3,12 @@ http = require "socket.http"
 https = require "ssl.https"
 ltn12 = require "ltn12"
 
-serpent = (loadfile "./libs/serpent.lua")()
-feedparser = (loadfile "./libs/feedparser.lua")()
-json = (loadfile "./libs/JSON.lua")()
-mimetype = (loadfile "./libs/mimetype.lua")()
-redis = (loadfile "./libs/redis.lua")()
-JSON = (loadfile "./libs/dkjson.lua")()
+serpent = (loadfile "./data/system/serpent.lua")()
+feedparser = (loadfile "./data/system/feedparser.lua")()
+json = (loadfile "./data/system/JSON.lua")()
+mimetype = (loadfile "./data/system/mimetype.lua")()
+redis = (loadfile "./data/system/redis.lua")()
+JSON = (loadfile "./data/system/dkjson.lua")()
 
 http.TIMEOUT = 10
 
