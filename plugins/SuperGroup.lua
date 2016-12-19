@@ -1690,7 +1690,7 @@ local kickedhash = 'kicked:'..msg.from.id..':'..msg.to.id
 			if result.from.username then
 				text = "@"..result.from.username.." <code>[ "..result.from.peer_id.." ]</code> added as Owner"
 			else
-				text = "[ "..result.from.peer_id.." ] added as <b>Owner</b>"
+				text = "<code>["..result.from.peer_id.."]</code> added as <b>Owner</b>"
 			end
 			send_large_msg(channel_id, text)
 		end
@@ -2010,7 +2010,7 @@ elseif get_cmd == "setadmin" then
 				if result.username then
 					text = member_username.." ["..v.peer_id.."] added as Owner"
 				else
-					text = "[<code>"..v.peer_id.."</code>] added as <b>Owner</b>"
+					text = "<code>["..v.peer_id.."]</code> added as <b>Owner</b>"
 				end
 			end
 		elseif memberid and vusername ~= member and vpeer_id ~= memberid then
@@ -2642,7 +2642,7 @@ end
 				data[tostring(msg.to.id)][data_cat] = nil
 				save_data(_config.moderation.data, data)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] cleaned rules")
-				return 'Rules have been cleaned'
+				return '<b>Rules</b> have been Cleaned!'
 			end
 			if matches[2] == 'about'or matches[2] =='درباره گروه' then
 				local receiver = get_receiver(msg)
@@ -2661,7 +2661,7 @@ end
 				chat_id = msg.to.id
 				local hash =  'mute_user:'..chat_id
 					redis:del(hash)
-				return "silentlist Cleaned"
+				return "<b>Silentlist</b> Cleaned!"
 			end
 			if matches[2] == 'username' and is_admin1(msg) then
 				local function ok_username_cb (extra, success, result)
@@ -2677,7 +2677,7 @@ end
 			end
 		end 
 
-		if matches[1] == 'lock'or matches[1] =='قفل کردن' and is_momod(msg) then
+		if matches[1] == 'lock'or matches[1] =='قفل' and is_momod(msg) then
 			local target = msg.to.id
 			if matches[2] == 'links'or matches[2] =='لینک' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked link posting ")
@@ -2707,11 +2707,11 @@ end
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked member ")
 				return lock_group_membermod(msg, data, target)
 			end		    
-			if matches[2]:lower() == 'rtl'or matches[2] =='راست به چپ' then
+			if matches[2]:lower() == 'rtl'or matches[2] =='ار تی ال' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked rtl chars. in names")
 				return lock_group_rtl(msg, data, target)
 			end
-			if matches[2] == 'tgservice'or matches[2] =='ورودوخروج' then
+			if matches[2] == 'tgservice'or matches[2] =='تیجی سرویس' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked Tgservice Actions")
 				return lock_group_tgservice(msg, data, target)
 			end
@@ -2719,7 +2719,7 @@ end
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked sticker posting")
 				return lock_group_sticker(msg, data, target)
 			end
-			if matches[2] == 'contacts'or matches[2] =='مخاطب ها' then
+			if matches[2] == 'contacts'or matches[2] =='شماره' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked contact posting")
 				return lock_group_contacts(msg, data, target)
 			end
@@ -2731,11 +2731,11 @@ end
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked english")
 				return lock_group_english(msg, data, target)
 			end
-			if matches[2] == 'fwd'or matches[2] =='فوروارد' then
+			if matches[2] == 'fwd'or matches[2] =='فروارد' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked fwd")
 				return lock_group_fwd(msg, data, target)
 			end
-			if matches[2] == 'emoji'or matches[2] =='شکلک' then
+			if matches[2] == 'emoji'or matches[2] =='اموجی' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked emoji")
 				return lock_group_emoji(msg, data, target)
 			end
@@ -2759,7 +2759,7 @@ end
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked leave")
 				return lock_group_leave(msg, data, target)
 			end
-			if matches[2] == 'bots'or matches[2] =='ربات ها' then
+			if matches[2] == 'bots'or matches[2] =='ربات' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked bots and kicked all SuperGroup bots")
  		channel_get_bots(receiver, callback_clean_bots, {msg = msg})
 				return lock_group_bots(msg, data, target)
@@ -2813,7 +2813,7 @@ end
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked sticker posting")
 				return unlock_group_sticker(msg, data, target)
 			end
-			if matches[2] == 'contacts'or matches[2] =='مخاطب ها' then
+			if matches[2] == 'contacts'or matches[2] =='شماره' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked contact posting")
 				return unlock_group_contacts(msg, data, target)
 			end
@@ -2825,7 +2825,7 @@ end
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked english")
 				return unlock_group_english(msg, data, target)
 			end
-			if matches[2] == 'fwd'or matches[2] =='فوروارد' then
+			if matches[2] == 'fwd'or matches[2] =='فروارد' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked fwd")
 				return unlock_group_fwd(msg, data, target)
 			end
@@ -2854,7 +2854,7 @@ end
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked leave")
 				return unlock_group_leave(msg, data, target)
 			end
-			if matches[2] == 'bots'or matches[2] =='ربات ها' then
+			if matches[2] == 'bots'or matches[2] =='ربات' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked bots")
 				return unlock_group_bots(msg, data, target)
 			end
@@ -2906,7 +2906,7 @@ end
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return msg_type.." has been muted"
+					return msg_type.." has been Muted"
 				else
 					return "SuperGroup mute "..msg_type.." is already on"
 				end
@@ -2916,7 +2916,7 @@ end
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return msg_type.." has been muted"
+					return msg_type.." has been Muted"
 				else
 					return "SuperGroup mute "..msg_type.." is already on"
 				end
@@ -2951,7 +2951,7 @@ end
 					return "Mute "..msg_type.." is already on"
 				end
 			end
-			if matches[2] == 'all'or matches[2] =='همه چت ها' then
+			if matches[2] == 'all'or matches[2] =='همه' then
 			local msg_type = 'All'
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
@@ -3283,7 +3283,7 @@ return {
 	"^(حذف)$",
 	"^[#!/]([Ll]ock) (.*)$",
 	"^([Ll]ock) (.*)$",
-	"^(قفل کردن) (.*)$",
+	"^(قفل) (.*)$",
 	"^(باز کردن) (.*)$",
 	"^[#!/]([Uu]nlock) (.*)$",
 	"^([Uu]nlock) (.*)$",
@@ -3291,7 +3291,7 @@ return {
 	"^[#!/]([Uu]nmute) ([^%s]+)$",
 	"^([Mm]ute) ([^%s]+)$",
 	"^([Uu]nmute) ([^%s]+)$",
-	"^(قفل کردن) ([^%s]+)$",
+	"^(قفل) ([^%s]+)$",
 	"^(باز کردن) ([^%s]+)$",
 	"^[#!/]([Ss]ilent)$",
 	"^[#!/]([Ss]ilent) (.*)$",
